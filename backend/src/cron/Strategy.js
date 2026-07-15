@@ -69,7 +69,7 @@ export async function startCron() {
 
   // Every weekday at 3:00 PM
   cron.schedule(
-    "0 15 * * 1-5",
+    "40 15 * * 1-5",
     async () => {
       if (!isTradingDay()) {
         console.log("Holiday / Weekend");
