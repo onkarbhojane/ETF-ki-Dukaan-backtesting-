@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SummaryCards from './components/SummaryCards';
-import PortfolioTable from './components/PortfolioTable';
-import ClosedPositionsTable from './components/ClosedPositionsTable';
-import ProfitChart from './components/ProfitChart';
+import SummaryCards from './Components/SummaryCards';
+import PortfolioTable from './Components/PortfolioTable';
+import ClosedPositionsTable from './Components/ClosedPositionsTable';
+import ProfitChart from './Components/ProfitChart';
 
 const UserDashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -34,9 +34,9 @@ const UserDashboard = () => {
       try {
         setLoading(true);
         const [userRes, txnRes, doneRes] = await Promise.all([
-          axios.get('https://etf-ki-dukaan-backtesting001.onrender.com/api/user/api/user'),
-          axios.get('https://etf-ki-dukaan-backtesting001.onrender.com/api/user/api/transactions'),
-          axios.get('https://etf-ki-dukaan-backtesting001.onrender.com/api/user/api/donetransactions'),
+          axios.get('https://etf-ki-dukaan-backtesting001.onrender.com/api/user'),
+          axios.get('https://etf-ki-dukaan-backtesting001.onrender.com/api/transactions'),
+          axios.get('https://etf-ki-dukaan-backtesting001.onrender.com/api/donetransactions'),
         ]);
         setUser(userRes.data);
         setTransactions(txnRes.data);
