@@ -1,26 +1,30 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import http from "http";
+
 import AllRoutes from "./routes/AllRoutes.routes.js";
-// import { getETFData } from "./cron/ETF_ki_Dukan_Job";
 import { startCron } from "./cron/Strategy.js";
+
 const app = express();
 
+// CORS
 app.use(
   cors({
     origin: "*",
-    methods: "*",
-    allowedHeaders: "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
+// Middleware
 app.use(express.json());
-// app.use(morgan("dev"));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-startCron(); 
+// Routes
+app.use("/api", AllRoutes);
 
-app.use("/api",AllRoutes);
+// Start ETF strategy cron
+startCron();
 
 export default app;
