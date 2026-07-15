@@ -34,9 +34,9 @@ const UserDashboard = () => {
       try {
         setLoading(true);
         const [userRes, txnRes, doneRes] = await Promise.all([
-          axios.get('http://localhost:8080/api/user'),
-          axios.get('http://localhost:8080/api/transactions'),
-          axios.get('http://localhost:8080/api/donetransactions'),
+          axios.get('https://etf-ki-dukaan-backtesting001.onrender.com/api/user/api/user'),
+          axios.get('https://etf-ki-dukaan-backtesting001.onrender.com/api/user/api/transactions'),
+          axios.get('https://etf-ki-dukaan-backtesting001.onrender.com/api/user/api/donetransactions'),
         ]);
         setUser(userRes.data);
         setTransactions(txnRes.data);
