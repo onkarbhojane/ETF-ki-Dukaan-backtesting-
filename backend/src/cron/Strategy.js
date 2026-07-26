@@ -87,18 +87,6 @@ export async function startCron() {
     },
   );
 
-
-  cron.schedule(
-    "* * * * *",
-    async () => {
-      console.log("Running every 1 minute:", new Date());
-      buyETF(await getETFData());
-    },
-    {
-      timezone: "Asia/Kolkata",
-    }
-  );
-
   // Check ETF sell conditions every 30 minutes during market hours
   cron.schedule(
     "*/30 9-15 * * 1-5",
