@@ -67,9 +67,11 @@ export async function startCron() {
     },
   );
 
+
+
   // Every weekday at 3:00 PM
   cron.schedule(
-    "44 15 * * 1-5",
+    "15 15 * * 1-5",
     async () => {
       if (!isTradingDay()) {
         console.log("Holiday / Weekend");
@@ -83,6 +85,18 @@ export async function startCron() {
     {
       timezone: "Asia/Kolkata",
     },
+  );
+
+
+  cron.schedule(
+    "* * * * *",
+    async () => {
+      console.log("Running every 1 minute:", new Date());
+      buyETF(await getETFData());
+    },
+    {
+      timezone: "Asia/Kolkata",
+    }
   );
 
   // Check ETF sell conditions every 30 minutes during market hours
@@ -129,6 +143,7 @@ const buyETF = async (data) => {
   try {
     const tns = await Transactions.find({});
     const user = await User.findOne({ name: "Onkar" }); // Assuming you have a User model and you want to fetch the first user
+    console.log("Fetched User:", user);
     if (!user) {
       console.error("No user found in the database.");
       return;
